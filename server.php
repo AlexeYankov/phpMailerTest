@@ -12,12 +12,8 @@ header("Content-Type: application/json");
 
 // Define the API routes and corresponding actions
 $routes = [
-    '/server.php' => 'hello',
-    '/api/add' => 'addNumbers',
+    '/server.php' => 'sendTo',
 ];
-
-$postData = file_get_contents("php://input");
-$decodedData = json_decode($postData, true);
 
 // Handle the API request
 $request = $_SERVER['REQUEST_URI'];
@@ -26,7 +22,6 @@ if (array_key_exists($request, $routes)) {
     $action = $routes[$request];
     if (function_exists($action)) {
         $result = call_user_func($action);
-        $value = $decodedData['email'];
         echo json_encode($result);
     } else {
         echo json_encode(['error' => 'Invalid action']);
@@ -35,8 +30,8 @@ if (array_key_exists($request, $routes)) {
     echo json_encode(['error' => 'Invalid route']);
 }
 
-// API action: Say hello
-function hello()
+// API action: Send message
+function sendTo()
 {
     if (isset($_POST['email'], $_POST['message'], $_POST['tel'])) {
         $name = $_POST['name'];
