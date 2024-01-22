@@ -103,15 +103,13 @@ function sendTo()
     
         $mail->setFrom($_POST["email"]);
     
-        $mail->addAddress('Yankovav.wm@gmail.com');
+        $mail->addAddress('rbru-metrika@yandex.ru');
     
         $mail->isHTML(true);
 
         $bodySubject = $_POST["message"] . ' ' . $_POST["email"] . ' ' . $_POST["name"];
     
         $mail->Subject = $_POST["tel"];
-        // $mail->Body = $_POST["name"];
-        // $mail->Body = $_POST["email"];
         $mail->Body = $bodySubject;
     
         $mail->send();
@@ -120,7 +118,6 @@ function sendTo()
         "
         <script>
         alert('Форма отправлена. Мы свяжемся с Вами в ближайшее время');
-        console.log(2)
         window.location.replace('https://rocket-business-gamma.vercel.app/');
         </script>
         ";
