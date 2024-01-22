@@ -1,5 +1,4 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -7,10 +6,6 @@ require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
-// Set the response header to JSON
-header("Content-Type: application/json");
-
-// Define the API routes and corresponding actions
 $routes = [
     '/server.php' => 'sendTo',
 ];
@@ -29,6 +24,7 @@ if (array_key_exists($request, $routes)) {
 } else {
     echo json_encode(['error' => 'Invalid route']);
 }
+
 
 // API action: Send message
 function sendTo()
@@ -49,9 +45,10 @@ function sendTo()
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
     
+        // $mail->setFrom('Yankovav.wm@gmail.com');
         $mail->setFrom($_POST["email"]);
     
-        $mail->addAddress('rocket.business.test.61@gmail.com');
+        $mail->addAddress('Yankovav.wm@gmail.com');
     
         $mail->isHTML(true);
     
@@ -69,6 +66,7 @@ function sendTo()
         alert('Форма отправлена. Мы свяжемся с Вами в ближайшее время');
         console.log(2)
         window.location.replace('https://rocket-business-gamma.vercel.app/');
+        // window.location.replace('https://rocket-business-gamma.vercel.app/');
         </script>
         ";
 
